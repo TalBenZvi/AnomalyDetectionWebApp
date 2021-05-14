@@ -12,7 +12,7 @@ function CorrelatedFeatures(index1, index2, correlation, line_reg, threshold) {
 }
 
 function toPoints(xs, ys){
-	points = []
+	let points = []
     for (let i = 0; i < xs.length; ++i) {
         points.push(new util.Point(xs[i], ys[i]))
     }
@@ -20,9 +20,9 @@ function toPoints(xs, ys){
 }
 
 function findThreshold(points, line_reg) {
-    max = 0
+    let max = 0
     for (const point of points) {
-        d = util.dev(point, line_reg)
+        let d = util.dev(point, line_reg)
         if (d > max) {
             max = d
         }
@@ -33,7 +33,7 @@ function findThreshold(points, line_reg) {
 function SimpleAnomalyDetector() {
     this.learnHelper = function(pearson, index1, index2, points) {
         if (pearson > CORRELATION_THRESHOLD){
-            linear_reg = util.linear_reg(points)
+            let linear_reg = util.linear_reg(points)
             return new CorrelatedFeatures(
                 index1,
                 index2,
@@ -46,21 +46,20 @@ function SimpleAnomalyDetector() {
     }
 
     this.learnNormal = function(timeSeries) {
-        correlatedFeaturesCollection = []
-        data = timeSeries.data
+        let correlatedFeaturesCollection = []
+        let data = timeSeries.data
         for (let i = 0; i < data.length; ++i) {
-            maxCorrelation = 0
-            maxCorrelationIndex = 0
+            let maxCorrelation = 0
+            let maxCorrelationIndex = 0
             for (let j = i + 1; j < data.length; ++j) {
-                arr = data[i]
-                pearson = Math.abs(util.pearson(arr, data[j]))
+                let pearson = Math.abs(util.pearson(data[i], data[j]))
                 if (pearson > maxCorrelation) {
                     maxCorrelation = pearson
                     maxCorrelationIndex = j
                 }
             }
-            points = toPoints(data[i], data[maxCorrelationIndex])
-            correlatedFeatures = this.learnHelper(maxCorrelation, i, maxCorrelationIndex, points)
+            let points = toPoints(data[i], data[maxCorrelationIndex])
+            let correlatedFeatures = this.learnHelper(maxCorrelation, i, maxCorrelationIndex, points)
             if (correlatedFeatures != null) {
                 correlatedFeaturesCollection.push(correlatedFeatures)
             }
@@ -73,22 +72,22 @@ function SimpleAnomalyDetector() {
     }
 
     this.detect = function(normalTimeSeries, anomalousTimeSeries) {
-        anomalyReport = ""
-        anomalousData = anomalousTimeSeries.data
-        correlatedFeaturesCollection = this.learnNormal(normalTimeSeries)
+        let anomalyReport = ""
+        let anomalousData = anomalousTimeSeries.data
+        let correlatedFeaturesCollection = this.learnNormal(normalTimeSeries)
         for (const correlatedFeatures of correlatedFeaturesCollection) {
-            anomalousIndices = []
-            featurePoints = toPoints(anomalousData[correlatedFeatures.index1], anomalousData[correlatedFeatures.index2])
+            let anomalousIndices = []
+            let featurePoints = toPoints(anomalousData[correlatedFeatures.index1], anomalousData[correlatedFeatures.index2])
             for (let j = 0; j < featurePoints.length; ++j) {
                 if (this.isAnomalous(featurePoints[j], correlatedFeatures)) {
                     anomalousIndices.push(j)
                 }
             }
             if (anomalousIndices.length != 0) {
-                reportLine = "Attributes " + correlatedFeatures.index1 + " and " + correlatedFeatures.index2 + " - anomalies in lines:"
-                i = 0
-                range_start = anomalousIndices[0]
-                range_end = anomalousIndices[0]
+                let reportLine = "Attributes " + correlatedFeatures.index1 + " and " + correlatedFeatures.index2 + " - anomalies in lines:"
+                let range_start = anomalousIndices[0]
+                let range_end = anomalousIndices[0]
+                let i = 0
                 while (i < anomalousIndices.length) {
                     while (i < anomalousIndices.length && anomalousIndices[i] + 1 == anomalousIndices[i + 1]) {
                         range_end = anomalousIndices[i + 1]

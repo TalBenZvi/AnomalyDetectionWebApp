@@ -13,7 +13,7 @@ function Line(a, b) {
 
 // average of arr
 function avg(arr){
-	sum = 0
+	let sum = 0
 	for (const num of arr) {
         sum += num
     }
@@ -22,8 +22,8 @@ function avg(arr){
 
 // variance of arr
 function variance(arr){
-	av = avg(arr)
-	sum = 0
+	let av = avg(arr)
+	let sum = 0
 	for (const num of arr) {
         sum += num * num
     }
@@ -32,7 +32,7 @@ function variance(arr){
 
 // covariance of arr1 and arr2
 function covariance(arr1, arr2){
-	sum = 0
+	let sum = 0
 	for (let i = 0; i < arr1.length; ++i){
 		sum += arr1[i] * arr2[i]
 	}
@@ -47,14 +47,14 @@ function pearson(arr1, arr2){
 
 // performs a linear regression and returns the line equation
 function linear_reg(points){
-	xs = []
-    ys = []
+	let xs = []
+    let ys = []
 	for (let i = 0; i < points.length; ++i) {
 		xs[i]=points[i].x
 		ys[i]=points[i].y
 	}
-	a = covariance(xs,ys) / variance(xs)
-	b = avg(ys) - a * avg(xs)
+	let a = covariance(xs,ys) / variance(xs)
+	let b = avg(ys) - a * avg(xs)
 	return new Line(a,b)
 }
 
