@@ -1,4 +1,5 @@
 var simpleDetection = require('./simpleAnomalyDetector.js')
+var hybridDetection = require('./hybridAnomalyDetector.js')
 var ts = require('./timeSeries.js')
 
 const algorithms = {
@@ -13,7 +14,7 @@ function detect(normalDataString, anomalousDataString, algorithm) {
         case algorithms.REGRESSION_BASED:
             return new simpleDetection.SimpleAnomalyDetector().detect(normalTimeSeries, anomalousTimeSeries)
         case algorithms.HYBRID:
-            break;
+            return new hybridDetection.HybridAnomalyDetector().detect(normalTimeSeries, anomalousTimeSeries)
         default:
             break;
     }

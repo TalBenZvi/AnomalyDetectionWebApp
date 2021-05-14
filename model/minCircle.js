@@ -102,3 +102,4 @@ function findMinCircle(points) {
 
 module.exports.Circle = Circle
 module.exports.findMinCircle = findMinCircle
+module.exports.dist = dist

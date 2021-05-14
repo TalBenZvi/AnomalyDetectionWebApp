@@ -3,12 +3,14 @@ var util = require('./anomalyDetectionUtil.js')
 const CORRELATION_THRESHOLD = 0.9
 const ANOMALY_THRESHOLD_INCREASE = 1.1
 
-function CorrelatedFeatures(index1, index2, correlation, line_reg, threshold) {
+function CorrelatedFeatures(index1, index2, correlation, line_reg, threshold, cx, cy) {
     this.index1 = index1
     this.index2 = index2
     this.correlation = correlation
     this.line_reg = line_reg
     this.threshold = threshold
+    this.cx = cx
+    this.cy = cy
 }
 
 function toPoints(xs, ys){
@@ -30,22 +32,27 @@ function findThreshold(points, line_reg) {
     return max
 }
 
-function SimpleAnomalyDetector() {
-    this.learnHelper = function(pearson, index1, index2, points) {
-        if (pearson > CORRELATION_THRESHOLD){
+class SimpleAnomalyDetector {
+    constructor() {
+        this.threshold = CORRELATION_THRESHOLD
+    }
+
+    learnHelper(pearson, index1, index2, points, correlatedFeaturesCollection) {
+        if (pearson > this.threshold){
             let linear_reg = util.linear_reg(points)
-            return new CorrelatedFeatures(
+            correlatedFeaturesCollection.push(new CorrelatedFeatures(
                 index1,
                 index2,
                 pearson,
                 linear_reg,
-                findThreshold(points, linear_reg) * ANOMALY_THRESHOLD_INCREASE
-            )
+                findThreshold(points, linear_reg) * ANOMALY_THRESHOLD_INCREASE,
+                0,
+                0
+            ))
         }
-        return null
     }
 
-    this.learnNormal = function(timeSeries) {
+    learnNormal(timeSeries) {
         let correlatedFeaturesCollection = []
         let data = timeSeries.data
         for (let i = 0; i < data.length; ++i) {
@@ -59,19 +66,16 @@ function SimpleAnomalyDetector() {
                 }
             }
             let points = toPoints(data[i], data[maxCorrelationIndex])
-            let correlatedFeatures = this.learnHelper(maxCorrelation, i, maxCorrelationIndex, points)
-            if (correlatedFeatures != null) {
-                correlatedFeaturesCollection.push(correlatedFeatures)
-            }
+            this.learnHelper(maxCorrelation, i, maxCorrelationIndex, points, correlatedFeaturesCollection)
         }
         return correlatedFeaturesCollection
     }
 
-    this.isAnomalous = function(point, correlatedFeatures){
+    isAnomalous(point, correlatedFeatures){
         return util.dev(point, correlatedFeatures.line_reg) > correlatedFeatures.threshold
     }
 
-    this.detect = function(normalTimeSeries, anomalousTimeSeries) {
+    detect(normalTimeSeries, anomalousTimeSeries) {
         let anomalyReport = ""
         let anomalousData = anomalousTimeSeries.data
         let correlatedFeaturesCollection = this.learnNormal(normalTimeSeries)
@@ -113,3 +117,4 @@ function SimpleAnomalyDetector() {
 }
 
 module.exports.SimpleAnomalyDetector = SimpleAnomalyDetector
+module.exports.CorrelatedFeatures = CorrelatedFeatures
