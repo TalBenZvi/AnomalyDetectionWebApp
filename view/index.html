@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <style>
+            table, tr {
+                border: 7px solid black;
+            }
+            td{
+                text-align: right;
+            }
+            img {
+                position:absolute;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <h1>
+            <p style="font-family: 'Courier New'">Anomaly Detection Web App</p>
+        </h1>
+        <img src="WhatsApp Video 2021-05-14 at 00.44.18.gif" style="margin-left: 70%" alt="animal_picture" style="width:128px;height:128px;">
+        <h3>@site editors: Roy Tamir, Shaked Winder, Tal Ben Zvi, Shilo Ullman</h3>
+        <br>
+        <br>
+    </head>
+    <body style="background-color:grey;">
+        <form action="/search" method="POST" enctype="multipart/form-data" name="searchForm" target="result">
+            <table style="background-color:white">
+                <tr>
+                    <td style="text-align: left">
+                        <select name="algorithms">
+                            <option value="Regression_based">Regression_based</option>
+                            <option value="Hibrid">Hybrid</option>
+                        </select>
+                    </td>
+                    <td style="text-align: right">בחירת אלגוריתם לזיהוי חריגות</td>
+                </tr>
+                <br>
+                <tr>
+                    <td style="text-align: left"><input type="file" name="file_without_anomalies"></td>
+                    <td style="text-align: right">קובץ בלי חריגות</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left"><input type="file" name="file_anomalies"></td>
+                    <td style="text-align: right">קובץ שייתכנו בו חריגות (לבדיקה)</td>
+                </tr>
+            </table>
+            <br>
+            <input type="submit">
+        </form>
+        <br>
+        <lable>Anomalies:</lable>
+        <br>
+        <br>
+        <iframe name="result" width="80%" height="500" style="background-color:white; box-shadow: 0px 0px 10px 10px red"></iframe>
+        <br>
+    </body>
+</html>
