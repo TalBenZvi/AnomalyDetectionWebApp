@@ -24,6 +24,7 @@ app.post("/detect", (req,res)=>{
         res.write(result)
         //view.showJSON(result)
     }
+    res.end()
 })
 
 
