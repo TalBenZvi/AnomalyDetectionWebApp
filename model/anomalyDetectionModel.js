@@ -3,8 +3,8 @@ var hybridDetection = require('./hybridAnomalyDetector.js')
 var ts = require('./timeSeries.js')
 
 const algorithms = {
-    REGRESSION_BASED: "regression_based",
-    HYBRID: "hybrid",
+    REGRESSION_BASED: "Regression_based",
+    HYBRID: "Hybrid",
 }
 
 function detect(normalDataString, anomalousDataString, algorithm) {

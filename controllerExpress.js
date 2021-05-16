@@ -1,7 +1,7 @@
 const express = require('express')
 const fileUpload = require('express-fileupload')
-const model = require('./model/anomalyDetectionModel')
 const path = require('path');
+const model = require(path.join(__dirname, './model/anomalyDetectionModel'))
 
 const app = express()
 app.use(express.urlencoded({
@@ -17,8 +17,8 @@ app.get('/', (req,res)=> {
 
 app.post("/detect", (req,res)=>{
     if (req.files) {
-        var csvNoError = req.files.csv1
-        var csvError = req.files.csv2
+        var csvNoError = req.files.file_without_anomalies
+        var csvError = req.files.file_anomalies
 
         var result = model.detect(csvNoError.data.toString(), csvError.data.toString(), req.body.algorithm)
         res.write(result)
