@@ -13,7 +13,7 @@ class HybridAnomalyDetector extends simpleAnomalyDetection.SimpleAnomalyDetector
     learnHelper(pearson, index1, index2, points, correlatedFeaturesCollection) {
         super.learnHelper(pearson, index1, index2, points, correlatedFeaturesCollection)
         if (pearson > HYBRID_CORRELATION_THRESHOLD && pearson < this.threshold) {
-            circle = findMinCircle(points)
+            let circle = minCircle.findMinCircle(points)
             correlatedFeaturesCollection.push(new simpleAnomalyDetection.CorrelatedFeatures(
                 index1,
                 index2,
