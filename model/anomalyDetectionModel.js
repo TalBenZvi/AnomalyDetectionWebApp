@@ -10,13 +10,10 @@ const algorithms = {
 function detect(normalDataString, anomalousDataString, algorithm) {
     let normalTimeSeries = new ts.TimeSeries(normalDataString)
     let anomalousTimeSeries = new ts.TimeSeries(anomalousDataString)
-    switch (algorithm) {
-        case algorithms.REGRESSION_BASED:
-            return new simpleDetection.SimpleAnomalyDetector().detect(normalTimeSeries, anomalousTimeSeries)
-        case algorithms.HYBRID:
-            return new hybridDetection.HybridAnomalyDetector().detect(normalTimeSeries, anomalousTimeSeries)
-        default:
-            break;
+    if (algorithm == "Regression_based") {
+        return new simpleDetection.SimpleAnomalyDetector().detect(normalTimeSeries, anomalousTimeSeries)
+    } else if (algorithm == "Hybrid") {
+        return new hybridDetection.HybridAnomalyDetector().detect(normalTimeSeries, anomalousTimeSeries)
     }
 }
 
