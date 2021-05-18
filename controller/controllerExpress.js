@@ -28,4 +28,4 @@ app.post("/detect", (req,res)=>{
 })
 
 
-app.listen(9876)
+app.listen(8080)
