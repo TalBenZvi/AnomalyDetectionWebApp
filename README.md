@@ -1,9 +1,10 @@
 # AnomalyDetectionWebApp
 
-milestone 2
-group members: Shilo Ulman, Tal Ben-Zvi, Shaked Winder, Roy Tamir
+## milestone 2
+## group members:
+Shilo Ulman, Tal Ben-Zvi, Shaked Winder, Roy Tamir
 
-Design:
+## Design:
 This is a website for anomaly detection.
 When a user comes to our site, he has the option to finds anomalies in a file that he/ she thinks there might be anomalies in.
 
@@ -15,7 +16,7 @@ The Model was wrote also with node.js, and he also can communicate with the cont
 Of course, the best part of our site is the gif that we added to it!!
 
 
-Preparing for using the application:
+## Preparing for using the application:
 for using our application, the user needs to download node.js package and the Express package (which we used for the controller part).
 For this, follow the next steps:
 1. download npm from the internet. you can do it at this link: https://nodejs.org/en/download/ (according to the operating system on your computer)
@@ -27,36 +28,36 @@ For this, follow the next steps:
 Now you are ready to use the app!!
 
 
-Implementation:
+## Implementation:
 For using the app, first enter in the cmd the next command (from the directory of where you saved the project): "node controller/controllerExpress.js".
 now you have two options:
 
 1. First one, (fit for most users) enter the domain of our web- which is http://localhost/8080/  on your browser. Now choose an algorithem for anomalies detection. After that, choose a file  without detections, and then a file with (maybe) some detections.
 Push the 'submit' buttom and find where there are anomalies in your file!
 
- 2. Second option (mainly for developers and geeks), write a code that send a http POST request to the domain http://localhost/8080/ with a json file that contain the next keys (according to this order!!): algorithm, file_without_anomalies, file_anomalies.
+ 2. Second option (mainly for developers and geeks), write a code that send a http POST request to the domain http://localhost/8080/detect/ with a json file that contain the next keys (according to this order!!): algorithm, file_without_anomalies, file_anomalies.
  The values are:
  For the first key: "Regression_based" or "Hybrid" (choose one of them).
  For the second key: a file without anomalies (for example, a CSV file).
  For the third key: a file with (maybe) anomalies (for example, a CSV file).
  run your code and get back a json file with the anomalies in your file, if they exist!
 
-
-Model:
+## project structure
+### Model:
 the model is the logic part of the application. The model gets from the controller the algorithem and the files the user chose and try to find anomalies in the file from the user. The result is sent back to the controller.
 
 
-controller:
+### controller:
 The controller gets the http request from the user, takes the arguments the user had entered and send them to the model.
 
 
-View:
+### View:
 The view part is what the user sees when he/ she visits our site.
 The view role is to make the detection accesible to those who are not developers, and don't know how to write a code that send a http-POST request. Throw it, the user can send his/ her request to find anomalies in a specific file.
 
 
-Explanation video of how to use the site:
+## Explanation video of how to use the site:
 Click this link () for a tutorial video on how to use the app
 
-UML diagram:
+## UML diagram:
 You can find  a UML diagram of our project in this link:
