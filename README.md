@@ -57,7 +57,7 @@ The view's role is to make the detection accesible to those who are not develope
 
 
 ## Explanation video of how to use the site:
-Click this link () for a tutorial video on how to use the app
+Click this link (https://youtu.be/pRRIstt7udg) for a tutorial video on how to use the app
 
 ## UML diagram:
 You can find  a UML diagram of our project at the following link: https://github.com/TalBenZvi/AnomalyDetectionWebApp/blob/main/UML_Diagram.pdf
