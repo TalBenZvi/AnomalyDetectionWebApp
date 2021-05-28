@@ -35,7 +35,7 @@ now you have two options:
 1. First one, (fit for most users) enter the domain of our web- which is http://localhost/8080/  on your browser. Now choose an algorithem for anomalies detection. After that, choose a file  without detections, and then a file with (maybe) some detections.
 Push the 'submit' buttom and find out where are the anomalies in your file!
 
- 2. Second option (mainly for developers and geeks), write a code that send a http POST request to the domain http://localhost/8080/detect/ with a json file that contain the next keys (according to this order!!): algorithm, file_without_anomalies, file_anomalies.
+ 2. Second option (mainly for developers and geeks), write a code that send a http POST request to the domain http://localhost/8080/ with a json file that contain the next keys (according to this order!!): algorithm, file_without_anomalies, file_anomalies.
  The values are:
  For the first key: "Regression_based" or "Hybrid" (choose one of them).
  For the second key: a file without anomalies (for example, a CSV file).
@@ -60,4 +60,4 @@ The view's role is to make the detection accesible to those who are not develope
 Click this link () for a tutorial video on how to use the app
 
 ## UML diagram:
-You can find  a UML diagram of our project in this link:
+You can find  a UML diagram of our project at the following link: https://github.com/TalBenZvi/AnomalyDetectionWebApp/blob/main/UML_Diagram.pdf
